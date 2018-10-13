@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>好友签名分布图</title>
+    <link rel="icon" th:href="@{/favicon.ico}" href="../../static/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+<div id="main" style="width: 1000px;height:700px;"></div>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script src="/echarts.min.js" th:href="@{/echarts.min.js}"></script>
+<script src="/echarts-wordcloud.min.js" th:href="@{/echarts-wordcloud.min.js}"></script>
+<script>
+
+    window.onload=function () {
+        $.get("/qr/get/sign",function (datas) {
+            console.log(datas);
+            var myChart = echarts.init(document.getElementById('main'));
+
+            var data = {
+                value: datas,
+                image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA10lEQVQ4T6WT7RFBMRBFz6uADugAFaACdEAHVIAKUIESUAEdUIIS6MDcjJi8zOblYX/ubs7e/UhB2rrA6B0+ATcrtTCcTeAADKLYBZgAj9BvAZTYTwiTil4VQFXPFW0pJBVHnxMrWAHLDGANKM/ZL4AdME8BpsA+o2ABbFMA+e9AKwF5Au1wE9YWtH9tohFB9FhDLt2DBVCFDTCOAJq85Evhx2KAHmkGOibLdESz1Bol/ZoZoA/rmFwroQI5OjUBmtEwBHxTvaTCK/gbIKqOSBuoY2rX/YcXDK0lEf5vzicAAAAASUVORK5CYII="
+            };
+//温馨提示：image 选取有严格要求不可过大；，否则firefox不兼容  iconfont上面的图标可以
+            let maskImage = new Image();
+            maskImage.src = data.image;
+
+            maskImage.onload = function() {
+                myChart.setOption({
+                    backgroundColor: '#fff',
+                    title:{
+                        text: '好友签名分布图',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        show: false
+                    },
+                    graphic: {
+                        elements: [{
+                            type: 'image',
+                            style: {
+                                image: data.image,
+                                width: 4,
+                                height: 4
+                            },
+                            left: 'center',
+                            top: 100
+                        }]
+                    },
+                    series: [{
+                        type: 'wordCloud',
+                        gridSize: 1,
+                        sizeRange: [15, 90],
+                        rotationRange: [50, 100],
+
+                        maskImage: maskImage,
+                        textStyle: {
+                            normal: {
+                                fontFamily: 'sans-serif',
+                                fontWeight: 'bold',
+                                // Color can be a callback function or a color string
+                                color: function () {
+                                    // Random color
+                                    return 'rgb(' + [
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160)
+                                    ].join(',') + ')';
+                                }
+                            },
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+                        data: data.value
+                    }]
+                })
+            };
+
+        });
+    };
+
+
+
+</script>
+</body>
+</html>

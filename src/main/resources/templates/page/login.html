@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎扫码登录</title>
+    <link rel="icon" th:href="@{/favicon.ico}" href="../../static/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+        .divmain{
+            text-align: center; /*让div内部文字居中*/
+            background-color: #fff;
+            border-radius: 20px;
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .loading{
+            position:fixed;
+            top:40%;
+            left:45%;
+            z-index:999;
+        }
+
+    </style>
+</head>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script>
+$(function () {
+    $("#loading").delay(2000).hide(0);
+   $.get("/qr/get/qrId",function (data) {
+       $("#divId").html("<img src='http://feng.com/qr/get/img' />");
+   });
+
+    window.setInterval("checkLogin()",10000);
+});
+
+    var checkLogin = function(){
+    var qrId=$("#qrId").val();
+    var t = null;
+
+    $.ajax({
+        url:'/qr/check/login',
+        type: "POST",
+        data:{"qrId":qrId},
+        success:function (data) {
+            $(".loading").fadeOut();
+            console.log(data);
+            t=data;
+            if (data=='1'){
+                window.clearInterval(t);
+                alert("登录成功!");
+                window.location.href="/qr/menu";
+            }
+        }
+    });
+};
+
+
+</script>
+<body bgcolor="#C4C4C4">
+
+<div id="loading" class="loading">
+    <img src="/loading.gif"/>
+</div>
+
+<div id="divId" class="divmain"></div>
+
+<div style="text-align: center;margin: 50px ">
+
+    <p><h3>使用手机微信扫码登录</h3></p>
+</div>
+</body>
+</html>

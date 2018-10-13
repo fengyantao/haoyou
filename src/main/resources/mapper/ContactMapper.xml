@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feng.spring.mapper.ContactMapper" >
+  <resultMap id="BaseResultMap" type="com.feng.spring.entity.Contact" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="ChatRoomId" property="chatroomid" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="VARCHAR" />
+    <result column="AttrStatus" property="attrstatus" jdbcType="VARCHAR" />
+    <result column="Statues" property="statues" jdbcType="VARCHAR" />
+    <result column="PYQuanPin" property="pyquanpin" jdbcType="VARCHAR" />
+    <result column="EncryChatRoomId" property="encrychatroomid" jdbcType="VARCHAR" />
+    <result column="DisplayName" property="displayname" jdbcType="VARCHAR" />
+    <result column="VerifyFlag" property="verifyflag" jdbcType="VARCHAR" />
+    <result column="UniFriend" property="unifriend" jdbcType="VARCHAR" />
+    <result column="ContactFlag" property="contactflag" jdbcType="VARCHAR" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="MemberList" property="memberlist" jdbcType="VARCHAR" />
+    <result column="StarFriend" property="starfriend" jdbcType="VARCHAR" />
+    <result column="HeadImgUrl" property="headimgurl" jdbcType="VARCHAR" />
+    <result column="AppAccountFlag" property="appaccountflag" jdbcType="VARCHAR" />
+    <result column="MemberCount" property="membercount" jdbcType="VARCHAR" />
+    <result column="RemarkPYInitial" property="remarkpyinitial" jdbcType="VARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="Province" property="province" jdbcType="VARCHAR" />
+    <result column="SnsFlag" property="snsflag" jdbcType="VARCHAR" />
+    <result column="Alias" property="alias" jdbcType="VARCHAR" />
+    <result column="KeyWord" property="keyword" jdbcType="VARCHAR" />
+    <result column="HideInputBarFlag" property="hideinputbarflag" jdbcType="VARCHAR" />
+    <result column="Signature" property="signature" jdbcType="VARCHAR" />
+    <result column="RemarkName" property="remarkname" jdbcType="VARCHAR" />
+    <result column="RemarkPYQuanPin" property="remarkpyquanpin" jdbcType="VARCHAR" />
+    <result column="Uin" property="uin" jdbcType="VARCHAR" />
+    <result column="OwnerUin" property="owneruin" jdbcType="VARCHAR" />
+    <result column="IsOwner" property="isowner" jdbcType="VARCHAR" />
+    <result column="PYInitial" property="pyinitial" jdbcType="VARCHAR" />
+    <result column="OwerName" property="owername" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from contact
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.feng.spring.entity.Contact" >
+    insert into contact (uuid, ChatRoomId, Sex,
+      AttrStatus, Statues, PYQuanPin, 
+      EncryChatRoomId, DisplayName, VerifyFlag, 
+      UniFriend, ContactFlag, UserName, 
+      MemberList, StarFriend, HeadImgUrl, 
+      AppAccountFlag, MemberCount, RemarkPYInitial, 
+      City, NickName, Province, 
+      SnsFlag, Alias, KeyWord, 
+      HideInputBarFlag, Signature, RemarkName, 
+      RemarkPYQuanPin, Uin, OwnerUin, 
+      IsOwner, PYInitial, OwerName
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{chatroomid,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{attrstatus,jdbcType=VARCHAR}, #{statues,jdbcType=VARCHAR}, #{pyquanpin,jdbcType=VARCHAR}, 
+      #{encrychatroomid,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, #{verifyflag,jdbcType=VARCHAR}, 
+      #{unifriend,jdbcType=VARCHAR}, #{contactflag,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{memberlist,jdbcType=VARCHAR}, #{starfriend,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
+      #{appaccountflag,jdbcType=VARCHAR}, #{membercount,jdbcType=VARCHAR}, #{remarkpyinitial,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{snsflag,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{hideinputbarflag,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{remarkname,jdbcType=VARCHAR}, 
+      #{remarkpyquanpin,jdbcType=VARCHAR}, #{uin,jdbcType=VARCHAR}, #{owneruin,jdbcType=VARCHAR}, 
+      #{isowner,jdbcType=VARCHAR}, #{pyinitial,jdbcType=VARCHAR}, #{owername,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.feng.spring.entity.Contact" >
+    update contact
+    set ChatRoomId = #{chatroomid,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=VARCHAR},
+      AttrStatus = #{attrstatus,jdbcType=VARCHAR},
+      Statues = #{statues,jdbcType=VARCHAR},
+      PYQuanPin = #{pyquanpin,jdbcType=VARCHAR},
+      EncryChatRoomId = #{encrychatroomid,jdbcType=VARCHAR},
+      DisplayName = #{displayname,jdbcType=VARCHAR},
+      VerifyFlag = #{verifyflag,jdbcType=VARCHAR},
+      UniFriend = #{unifriend,jdbcType=VARCHAR},
+      ContactFlag = #{contactflag,jdbcType=VARCHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      MemberList = #{memberlist,jdbcType=VARCHAR},
+      StarFriend = #{starfriend,jdbcType=VARCHAR},
+      HeadImgUrl = #{headimgurl,jdbcType=VARCHAR},
+      AppAccountFlag = #{appaccountflag,jdbcType=VARCHAR},
+      MemberCount = #{membercount,jdbcType=VARCHAR},
+      RemarkPYInitial = #{remarkpyinitial,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      NickName = #{nickname,jdbcType=VARCHAR},
+      Province = #{province,jdbcType=VARCHAR},
+      SnsFlag = #{snsflag,jdbcType=VARCHAR},
+      Alias = #{alias,jdbcType=VARCHAR},
+      KeyWord = #{keyword,jdbcType=VARCHAR},
+      HideInputBarFlag = #{hideinputbarflag,jdbcType=VARCHAR},
+      Signature = #{signature,jdbcType=VARCHAR},
+      RemarkName = #{remarkname,jdbcType=VARCHAR},
+      RemarkPYQuanPin = #{remarkpyquanpin,jdbcType=VARCHAR},
+      Uin = #{uin,jdbcType=VARCHAR},
+      OwnerUin = #{owneruin,jdbcType=VARCHAR},
+      IsOwner = #{isowner,jdbcType=VARCHAR},
+      PYInitial = #{pyinitial,jdbcType=VARCHAR},
+      OwerName = #{owername,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select uuid, ChatRoomId, Sex, AttrStatus, Statues, PYQuanPin, EncryChatRoomId, DisplayName,
+    VerifyFlag, UniFriend, ContactFlag, UserName, MemberList, StarFriend, HeadImgUrl, 
+    AppAccountFlag, MemberCount, RemarkPYInitial, City, NickName, Province, SnsFlag, 
+    Alias, KeyWord, HideInputBarFlag, Signature, RemarkName, RemarkPYQuanPin, Uin, OwnerUin, 
+    IsOwner, PYInitial, OwerName
+    from contact
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select uuid, ChatRoomId, Sex, AttrStatus, Statues, PYQuanPin, EncryChatRoomId, DisplayName,
+    VerifyFlag, UniFriend, ContactFlag, UserName, MemberList, StarFriend, HeadImgUrl, 
+    AppAccountFlag, MemberCount, RemarkPYInitial, City, NickName, Province, SnsFlag, 
+    Alias, KeyWord, HideInputBarFlag, Signature, RemarkName, RemarkPYQuanPin, Uin, OwnerUin, 
+    IsOwner, PYInitial, OwerName
+    from contact
+  </select>
+  
+  <select id="getSex" parameterType="java.lang.String" resultType="com.feng.spring.entity.ChartVo">
+    SELECT (
+    CASE Sex
+	WHEN 1 THEN '男'
+	WHEN 2 THEN '女'
+	WHEN 0 THEN '未知'
+	ELSE
+		'未知'
+    END ) AS `name`
+    ,COUNT(Sex) as `value` FROM contact WHERE OwerName=#{uuid,jdbcType=VARCHAR} GROUP BY Sex
+  </select>
+
+  <select id="getProvince" parameterType="java.lang.String" resultType="com.feng.spring.entity.ChartVo">
+    SELECT (
+    CASE Province
+    WHEN '' THEN '未知'
+    ELSE Province
+    END) AS `name`
+    ,COUNT(Province) as `value` FROM contact WHERE OwerName=#{uuid,jdbcType=VARCHAR} GROUP BY Province
+  </select>
+
+  <select id="getSign" parameterType="java.lang.String" resultType="com.feng.spring.entity.Contact">
+    SELECT Signature FROM contact WHERE OwerName=#{uuid,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
