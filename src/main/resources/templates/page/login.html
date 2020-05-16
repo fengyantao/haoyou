@@ -33,7 +33,7 @@
 $(function () {
     $("#loading").delay(2000).hide(0);
    $.get("/qr/get/qrId",function (data) {
-       $("#divId").html("<img src='http://springcloud.top:8082/qr/get/img' />");
+       $("#divId").html("<img src='http://springcloud.top:20082/qr/get/img' />");
    });
 
     window.setInterval("checkLogin()",10000);
