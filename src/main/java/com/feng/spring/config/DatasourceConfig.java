@@ -11,8 +11,10 @@ package com.feng.spring.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.feng.spring.properties.DatasourceProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +36,10 @@ import java.util.Map;
  */
 @Configuration
 public class DatasourceConfig {
+
+    @Autowired
+    private DatasourceProperties datasourceProperties;
+
     /**
      * 注册DruidServlet
      * @return
@@ -68,9 +74,9 @@ public class DatasourceConfig {
     @Bean
     public DruidDataSource druidDataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUsername("root");
-        druidDataSource.setPassword("123456");
-        druidDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/wechat");
+        druidDataSource.setUsername(datasourceProperties.getUsername());
+        druidDataSource.setPassword(datasourceProperties.getPassword());
+        druidDataSource.setUrl(datasourceProperties.getUrl());
         druidDataSource.setMaxActive(100);
         druidDataSource.setFilters("stat,wall");
         druidDataSource.setInitialSize(10);

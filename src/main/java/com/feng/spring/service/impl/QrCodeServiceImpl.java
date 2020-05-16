@@ -1,10 +1,6 @@
 /**
- *
- *
  * @author: feng[17316085657@163.com]
  * @date: 2018/9/22 下午9:24
- *
- *
  */
 package com.feng.spring.service.impl;
 
@@ -78,16 +74,20 @@ public class QrCodeServiceImpl implements QrCodeService {
 //        iRedisService.setEx(Constans.REDIS_KEY+paramId,3000,JSONObject.toJSONString(core));
 //        iRedisService.setEx(paramId,3000,uuid);
         String path = qrPath + File.separator + core.getUuid() + "QR.jpg";
-        log.info("===========================图片路径[{}]",path);
-        loginService.getQR(path);
+        log.info("===========================图片路径[{}]", path);
         try {
+            File file = new File(path);
+            if (!file.exists()){
+                file.createNewFile();
+            }
+            loginService.getQR(path);
             response.setHeader("Pragma", "No-cache");
             response.setHeader("Cache-Control", "no-cache");
             response.setDateHeader("Expires", 0);
 
             BufferedInputStream bis = null;
             OutputStream os = null;
-            File file = new File(path);
+
             FileInputStream fileInputStream = new FileInputStream(file);
 
             bis = new BufferedInputStream(fileInputStream);
